@@ -59,7 +59,7 @@ ORDER BY pclass ASC;
 -- 5. Порты посадки со средним возрастом выше 30 лет
 -- Вариант 1. По исходным значениям age
 SELECT embarked, ROUND(AVG(age), 1) AS avg_age
-FROM others.titanic
+FROM titanic
 WHERE embarked IN ('C', 'Q', 'S')
 GROUP BY embarked
 HAVING AVG(age) > 30
@@ -75,7 +75,7 @@ ORDER BY avg_age DESC;
 -- Проверка значений портов и среднего возраста
 SELECT embarked, COUNT(*) AS passengers_count,
     ROUND(AVG(age), 2) AS avg_age
-FROM others.titanic
+FROM titanic
 GROUP BY embarked
 ORDER BY embarked;
 
@@ -83,7 +83,7 @@ ORDER BY embarked;
 
 -- (5) Вариант 2. Без нулевых возрастов
 SELECT embarked, ROUND(AVG(age), 1) AS avg_age
-FROM others.titanic
+FROM titanic
 WHERE embarked IN ('C', 'Q', 'S')
 AND age > 0
 GROUP BY embarked
@@ -94,7 +94,7 @@ ORDER BY avg_age DESC;
 -- 6. Минимальный возраст пассажиров по классу
 -- Вариант 1. Строго по условию задания
 SELECT pclass, MIN(age) AS min_age
-FROM others.titanic
+FROM titanic
 GROUP BY pclass
 ORDER BY pclass ASC;
 
@@ -107,7 +107,7 @@ ORDER BY pclass ASC;
 
 -- Проверка количества нулевых возрастов
 SELECT pclass, COUNT(*) AS zero_age_count
-FROM others.titanic
+FROM titanic
 WHERE age = 0
 GROUP BY pclass
 ORDER BY pclass ASC;
@@ -117,7 +117,7 @@ ORDER BY pclass ASC;
 -- (6) Вариант 2. Минимальный положительный возраст
 -- Нулевые значения исключены из расчёта.
 SELECT pclass, MIN(age) AS min_age
-FROM others.titanic
+FROM titanic
 WHERE age > 0
 GROUP BY pclass
 ORDER BY pclass ASC;
